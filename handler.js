@@ -33,7 +33,7 @@ const get_token_payload = (token) => {
         return payload
     } catch (error) {
         return null
-  
+    }
 }
 
 const check_token = (req, res, next) => {
