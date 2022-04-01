@@ -1,0 +1,9 @@
+  <form method="post" action="f-quote-form">
+    <h1>Fuel Quote Form</h1>
+    <input type="number" id="gallons" name="gallons" placeholder="Gallons Requested" required>
+    <input type="text" required id="deliveryAddress" name="deliveryAddress" placeholder="Delivery Date" value="{{data.address}}" readonly>
+    <input type="date" required id="deliveryDate" name="deliveryDate" placeholder="Delivery Date" required>
+    <input type="number" required id="price" name="price" placeholder="Suggested Price" value="{{data.suggested_price}}" readonly>
+    <input type="number" required id="total" name="total" placeholder="Total Amount Due" readonly>
+    <input type="submit" value="Submit Fuel Quote Form">
+  </form>
