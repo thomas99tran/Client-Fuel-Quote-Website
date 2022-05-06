@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Account Management</title>
+  <link rel="stylesheet" type="text/css" href="style2.css">
+<body1>
+     {{{body}}}
+</body1>
+</head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    /*$("input[name='gallons']").on("change, keyup mouseup", function() {
+        var current_value = parseInt($("input[name='gallons']").val())
+        var current_price = parseInt($("input[name='price']").val())
+        $("input[name='total']").val(current_value * current_price)
+    })*/
+
+    console.log(window.location.pathname)
+    if (window.location.pathname == "/f-quote-form") {
+      const get_quote = $("input[name='get_quote']")
+      const submit_quote = $("#submit_quote")
+
+      get_quote.attr("disabled", true)
+      submit_quote.attr("disabled", true)
+
+      let gallons_input = $("input[name='gallons']")
+      let deliveryDate_input = $("input[name='deliveryDate']")
+
+      $('form').on('keyup change paste', 'input, select, textarea', function(){
+        if (gallons_input.val().length !== 0 && deliveryDate_input.val().length !== 0) {
+          get_quote.removeAttr("disabled")
+        } else {
+          get_quote.attr("disabled", true)
+          submit_quote.attr("disabled", true)
+        }
+      });        
+    }
+  })
+
+  function getQuote () {
+    let gallons_input = $("input[name='gallons']").val()
+    const submit_quote = $("#submit_quote")
+    const total_price = $("input[name='total']")
+    const price = $("input[name='price']")
+
+    $.ajax({
+      url: "/getQuote",
+      type: "POST",
+      data: {
+        gallons: gallons_input
+      },
+      success (res) {
+        submit_quote.removeAttr("disabled")
+        price.val(Number(res.suggested_price))
+        total_price.val(Number(res.total_price))
+        console.log(res)
+      },
+      error (res) {
+        console.log(res)
+      }
+    })
+  }
+</script>
+</html>
